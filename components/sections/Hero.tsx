@@ -80,7 +80,10 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0 size-full object-cover"
       />
       {/* dark scrim so the headline + cards stay legible */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 bg-black/40" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-black/40"
+      />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-linear-to-b from-ink/40 via-transparent to-ink/85"
@@ -92,7 +95,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 26 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.85, ease }}
-          className="mt-auto flex items-center justify-start text-left lg:mt-0 lg:flex-1 lg:justify-center lg:text-center"
+          className="mt-auto flex items-center justify-start text-left"
         >
           <h1 className="max-w-190 text-[clamp(2.6rem,6.2vw,4.5rem)] font-semibold leading-[1.06] tracking-tight">
             The <span className="font-serif font-normal italic">Sound</span>
@@ -110,14 +113,9 @@ export default function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15, ease }}
-            className="order-2 min-w-0 max-w-130 lg:order-1"
+            className="order-2 min-w-0 max-w-130 lg:order-1 lg:self-start"
           >
-            <p className="hidden text-[15px] leading-relaxed text-white/70 lg:block">
-              Every Sound is designed around your comfort, time and ambition so
-              you can focus on what truly matters, while we take care of
-              everything else.
-            </p>
-            <div className="mt-5 hidden h-0.75 w-14 rounded-full bg-white/70 lg:block" />
+            <div className="mt-8 hidden h-0.75 w-14 rounded-full bg-white/70 lg:block" />
             <button
               onClick={() => setStoryOpen(true)}
               className="group inline-flex items-center gap-3 text-[13px] font-medium uppercase tracking-[0.12em] text-white/90 transition-colors hover:text-white lg:mt-6"
@@ -135,7 +133,9 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.3, ease }}
             className="order-1 min-w-0 w-full lg:order-2 lg:max-w-120 lg:justify-self-end"
           >
-            <HeroEvents />
+            <div className="lg:-translate-y-40">
+              <HeroEvents />
+            </div>
           </motion.div>
         </div>
 

@@ -12,16 +12,14 @@ const ease = [0.22, 1, 0.36, 1] as const;
 function EventCardInner({
   event,
   expanded,
-  showHint = false,
 }: {
   event: HeroEvent;
   expanded: boolean;
-  showHint?: boolean;
 }) {
   return (
-    <div className="flex h-full items-stretch gap-4 rounded-[22px] bg-white p-2 pr-3 text-ink shadow-float">
+    <div className="flex h-full items-stretch gap-4 rounded-[22px] bg-white p-3 text-ink shadow-float">
       <motion.div
-        animate={{ width: expanded ? 108 : 68, height: expanded ? 140 : 68 }}
+        animate={{ width: expanded ? 108 : 98, height: expanded ? 140 : 111 }}
         transition={{ duration: 0.4, ease }}
         className="relative shrink-0 self-center overflow-hidden rounded-2xl bg-fog"
       >
@@ -79,7 +77,7 @@ function EventCardInner({
             </motion.div>
           )}
         </AnimatePresence>
-        {showHint && !expanded && (
+        {!expanded && (
           <div className="mt-auto flex items-center justify-between border-t border-line/70 pt-2.5">
             <span className="text-sm text-slate">View More</span>
             <ArrowRight className="size-4 text-slate" />
@@ -104,14 +102,21 @@ function DesktopStack() {
       onMouseLeave={() => setOpen(false)}
       className="relative hidden w-full lg:block"
     >
-      <div className="flex flex-col">
+      {/* invisible spacer sized to the resting (closed) deck — reserves the
+          space up front so hovering (which is absolutely positioned below)
+          never changes this component's height and reflows the page above it */}
+      <div aria-hidden className="invisible">
+        <EventCardInner event={cards[front]} expanded={false} />
+      </div>
+
+      <div className="absolute inset-0 flex flex-col gap-3">
         {cards.map((event, i) => {
           const isFront = i === front;
           return (
             <motion.div
               key={event.title}
               animate={{
-                marginBottom: isFront ? 0 : open ? 12 : -72,
+                y: isFront && !open ? "-94%" : 0,
                 scale: open || isFront ? 1 : 0.94,
                 opacity: open || isFront ? 1 : 0.75,
               }}
@@ -138,7 +143,7 @@ function MobileCard({ event }: { event: HeroEvent }) {
       onClick={() => setOpen((o) => !o)}
       className="w-[86%] shrink-0 snap-center text-left"
     >
-      <EventCardInner event={event} expanded={open} showHint={!open} />
+      <EventCardInner event={event} expanded={open} />
     </button>
   );
 }
