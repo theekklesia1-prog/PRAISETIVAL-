@@ -89,7 +89,7 @@ export const featureCards = [
 
 /** Placeholder event date for the live countdown (swap for the real date).
  *  Set ~145 days out to echo the design's "145 DAYS" mock. */
-export const EVENT_DATE = "2026-12-11T18:30:00";
+export const EVENT_DATE = "2026-11-28T15:00:00+00:00";
 
 export const heroHeadlines = [
   "We are a Movement",
